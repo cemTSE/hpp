@@ -12,7 +12,10 @@ import fr.tse.fi2.hpp.labs.beans.measure.QueryProcessorMeasure;
 import fr.tse.fi2.hpp.labs.dispatcher.LoadFirstDispatcher;
 import fr.tse.fi2.hpp.labs.queries.AbstractQueryProcessor;
 import fr.tse.fi2.hpp.labs.queries.impl.IncrementalAverage;
+<<<<<<< HEAD
 import fr.tse.fi2.hpp.labs.queries.impl.NaiveAverage;
+=======
+>>>>>>> 0de2c63eb25a5f465922e323b94ac7da00994b06
 import fr.tse.fi2.hpp.labs.queries.impl.SimpleQuerySumEvent;
 import fr.tse.fi2.hpp.labs.queries.impl.lab1.SumQuery;
 

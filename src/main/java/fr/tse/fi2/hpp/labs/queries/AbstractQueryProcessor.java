@@ -1,5 +1,4 @@
 package fr.tse.fi2.hpp.labs.queries;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,17 +7,19 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import fr.tse.fi2.hpp.labs.beans.DebsRecord;
 import fr.tse.fi2.hpp.labs.beans.GridPoint;
 import fr.tse.fi2.hpp.labs.beans.Route;
 import fr.tse.fi2.hpp.labs.beans.measure.QueryProcessorMeasure;
 import fr.tse.fi2.hpp.labs.dispatcher.StreamingDispatcher;
+<<<<<<< HEAD
 import fr.tse.fi2.hpp.labs.queries.impl.lab2.Write;
 
+=======
+import fr.tse.fi2.hpp.labs.queries.impl.lab2.Writer;
+>>>>>>> 0de2c63eb25a5f465922e323b94ac7da00994b06
 /**
  * Every query must extend this class that provides basic functionalities such
  * as :
@@ -33,10 +34,12 @@ import fr.tse.fi2.hpp.labs.queries.impl.lab2.Write;
  * 
  */
 public abstract class AbstractQueryProcessor implements Runnable {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0de2c63eb25a5f465922e323b94ac7da00994b06
 	private final static Logger logger = LoggerFactory
 			.getLogger(AbstractQueryProcessor.class);
-
 	/**
 	 * Counter to uniquely identify the query processors
 	 */
@@ -63,7 +66,6 @@ public abstract class AbstractQueryProcessor implements Runnable {
 	 * For synchronisation purpose
 	 */
 	private CountDownLatch latch;
-
 	/**
 	 * Default constructor. Initialize event queue and writer
 	 */
@@ -73,18 +75,22 @@ public abstract class AbstractQueryProcessor implements Runnable {
 		// Initialize queue
 		this.eventqueue = new LinkedBlockingQueue<>();
 		this.Resultqueue = new LinkedBlockingQueue<>();
+<<<<<<< HEAD
 		 Write write= new  Write(Resultqueue,  id);
 		 thread = new Thread(write);
 		 thread.start();
 
+=======
+		 Writer write= new  Writer(Resultqueue,  id);
+		 thread = new Thread(write);
+		 thread.start();
+>>>>>>> 0de2c63eb25a5f465922e323b94ac7da00994b06
 		// Initialize writer
 		
 	}
-
 	public void setLatch(CountDownLatch latch) {
 		this.latch = latch;
 	}
-
 	@Override
 	public void run() {
 		logger.info("Starting query processor " + id);
@@ -110,14 +116,12 @@ public abstract class AbstractQueryProcessor implements Runnable {
 		finish();
 		logger.info("Closing query processor " + id);
 	}
-
 	/**
 	 * 
 	 * @param record
 	 *            record to be processed
 	 */
 	protected abstract void process(DebsRecord record);
-
 	/**
 	 * 
 	 * @param record
@@ -135,7 +139,6 @@ public abstract class AbstractQueryProcessor implements Runnable {
 		GridPoint dropoff = convert(lat2, long2);
 		return new Route(pickup, dropoff);
 	}
-
 	/**
 	 * 
 	 * @param lat1
@@ -145,7 +148,6 @@ public abstract class AbstractQueryProcessor implements Runnable {
 	private GridPoint convert(float lat1, float long1) {
 		return new GridPoint(cellX(lat1), cellY(long1));
 	}
-
 	/**
 	 * Provided by Syed and Abderrahmen
 	 * 
@@ -153,17 +155,13 @@ public abstract class AbstractQueryProcessor implements Runnable {
 	 * @return
 	 */
 	private int cellX(float x) {
-
 		// double x=0;
 		double x_0 = -74.913585;
 		double delta_x = 0.005986 / 2;
-
 		// double cell_x;
 		Double cell_x = 1 + Math.floor(((x - x_0) / delta_x) + 0.5);
-
 		return cell_x.intValue();
 	}
-
 	/**
 	 * Provided by Syed and Abderrahmen
 	 * 
@@ -171,23 +169,17 @@ public abstract class AbstractQueryProcessor implements Runnable {
 	 * @return
 	 */
 	private int cellY(double y) {
-
 		double y_0 = 41.474937;
 		double delta_y = 0.004491556 / 2;
-
 		Double cell_y = 1 + Math.floor(((y_0 - y) / delta_y) + 0.5);
-
 		return cell_y.intValue();
-
 	}
-
 	/**
 	 * @return the id of the query processor
 	 */
 	public final int getId() {
 		return id;
 	}
-
 	/**
 	 * 
 	 * @param line
@@ -203,9 +195,13 @@ public abstract class AbstractQueryProcessor implements Runnable {
 		}*/
 		Resultqueue.add(line);
 		
+<<<<<<< HEAD
 
 	} 
 
+=======
+	} 
+>>>>>>> 0de2c63eb25a5f465922e323b94ac7da00994b06
 	/**
 	 * Poison pill has been received, close output
 	 * @throws InterruptedException 
@@ -224,8 +220,13 @@ public abstract class AbstractQueryProcessor implements Runnable {
 		// Decrease latch count
 		latch.countDown();
 	}
+<<<<<<< HEAD
 
 	
 
 
 }
+=======
+	
+}
+>>>>>>> 0de2c63eb25a5f465922e323b94ac7da00994b06
